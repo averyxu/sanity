@@ -11,11 +11,13 @@ import IntentButton from 'part:@sanity/components/buttons/intent'
 import {ScrollContainer} from 'part:@sanity/components/scroll'
 import TabPanel from 'part:@sanity/components/tabs/tab-panel'
 import React from 'react'
-import {childrenToElementArray} from '../helpers'
-import {MenuItem, MenuItemGroup} from '../menus/types'
-import Styleable from '../utilities/Styleable'
+import {childrenToElementArray} from '../../helpers'
+import {MenuItem, MenuItemGroup} from '../../menus/types'
+import Styleable from '../../utilities/Styleable'
 
 import defaultStyles from './DefaultPane.css'
+import {DefaultPaneHeader} from './DefaultPaneHeader'
+import {DefaultPaneFooter} from './DefaultPaneFooter'
 
 interface DefaultPaneProps {
   color?: 'success' | 'warning' | 'danger'
@@ -385,19 +387,13 @@ class DefaultPane extends React.PureComponent<DefaultPaneProps, State> {
         onClick={this.handleRootClick}
         ref={this.setRootElement}
       >
-        <div className={styles.header}>
-          <div className={styles.headerContent}>
-            <div className={styles.titleContainer}>
-              <h2 className={styles.title} onClick={this.handleTitleClick}>
-                {title}
-              </h2>
-            </div>
-            <div className={styles.headerTools}>{this.renderHeaderTools()}</div>
-          </div>
-
-          {/* To render tabs and similar */}
-          {headerViewMenuNode && <div className={styles.headerViewMenu}>{headerViewMenuNode}</div>}
-        </div>
+        <DefaultPaneHeader
+          onTitleClick={this.handleTitleClick}
+          styles={styles}
+          title={title}
+          tools={this.renderHeaderTools()}
+          viewMenu={headerViewMenuNode}
+        />
 
         {hasTabs ? (
           <TabPanel
@@ -412,9 +408,11 @@ class DefaultPane extends React.PureComponent<DefaultPaneProps, State> {
         )}
 
         {footer && (
-          <div className={hasTabs && hasSiblings ? styles.hoverFooter : styles.stickyFooter}>
+          <DefaultPaneFooter
+            className={hasTabs && hasSiblings ? styles.hoverFooter : styles.stickyFooter}
+          >
             {footer}
-          </div>
+          </DefaultPaneFooter>
         )}
       </div>
     )
