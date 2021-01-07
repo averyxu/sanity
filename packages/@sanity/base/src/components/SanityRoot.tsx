@@ -4,6 +4,7 @@ import {
   PortalProvider,
   ThemeColorProvider,
   ThemeProvider,
+  ToastProvider,
   useRootTheme,
 } from '@sanity/ui'
 import config from 'config:sanity'
@@ -59,18 +60,26 @@ function AppProvider() {
     <UserColorManagerProvider manager={userColorManager}>
       <PortalProvider element={portalElement}>
         <LayerProvider>
-          <SnackbarProvider>
-            <ThemeColorProvider tone="transparent">
-              <GlobalStyle />
-            </ThemeColorProvider>
-            <Root scheme="light">
-              <DevServerStatus />
-              <ErrorHandler />
-              <RootComponent />
-              <VersionChecker />
-            </Root>
-            <div data-portal="" ref={setPortalElement} />
-          </SnackbarProvider>
+          <ToastProvider paddingY={7} zOffset={10000}>
+            <UserColorManagerProvider manager={userColorManager}>
+              <PortalProvider element={portalElement}>
+                <LayerProvider>
+                  <SnackbarProvider>
+                    <ThemeColorProvider tone="transparent">
+                      <GlobalStyle />
+                    </ThemeColorProvider>
+                    <Root>
+                      <DevServerStatus />
+                      <ErrorHandler />
+                      <RootComponent />
+                      <VersionChecker />
+                    </Root>
+                    <div data-portal="" ref={setPortalElement} />
+                  </SnackbarProvider>
+                </LayerProvider>
+              </PortalProvider>
+            </UserColorManagerProvider>
+          </ToastProvider>
         </LayerProvider>
       </PortalProvider>
     </UserColorManagerProvider>
