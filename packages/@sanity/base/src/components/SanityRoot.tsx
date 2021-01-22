@@ -6,7 +6,11 @@ import {PortalProvider} from 'part:@sanity/components/portal'
 import SnackbarProvider from 'part:@sanity/components/snackbar/provider'
 import React, {useState} from 'react'
 import Refractor from 'react-refractor'
+import bash from 'refractor/lang/bash'
+import javascript from 'refractor/lang/javascript'
+import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
+import typescript from 'refractor/lang/typescript'
 import styled from 'styled-components'
 import {REQUIRED_UI_VERSION} from '../requiredSanityUiVersion'
 import {theme} from '../theme'
@@ -17,7 +21,11 @@ import {GlobalStyle} from './GlobalStyle'
 import MissingProjectConfig from './MissingProjectConfig'
 import VersionChecker from './VersionChecker'
 
+Refractor.registerLanguage(bash)
+Refractor.registerLanguage(javascript)
+Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
+Refractor.registerLanguage(typescript)
 
 const Root = styled(Card).attrs({tone: 'transparent'})`
   height: 100%;

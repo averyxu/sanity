@@ -1,6 +1,6 @@
 import {RootTheme, studioTheme as defaults} from '@sanity/ui'
 import legacyTheme from 'sanity:css-custom-properties'
-import {color} from './color'
+import {color} from './color2'
 
 // For debugging purposes
 declare global {
@@ -10,6 +10,8 @@ declare global {
 }
 
 window.__sanityLegacyTheme = legacyTheme
+
+export {_tones} from './color2'
 
 export const theme: RootTheme = {
   ...defaults,
